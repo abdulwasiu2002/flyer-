@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import { saveAs } from "file-saver";
 import { toPng } from "html-to-image";
 import { FlyerPreview, FlyerData } from "../components/FlyerPreview";
 import { Input } from "@/components/ui/input";
@@ -175,7 +174,9 @@ export default function StudentForm() {
     const generationToast = toast.loading("Generating your premium flyer...");
 
     try {
-      if (!previewRef.current) throw new Error("Preview ref missing");
+      iif (!hdRef.current) {
+  throw new Error("HD Preview ref missing");
+}
 
       // Generate the flyer code first to display on the PNG
       const flyer_code = `NCC26-${Math.floor(1000 + Math.random() * 9000)}`;
@@ -202,12 +203,7 @@ await Promise.all(
   })
 );
 
-const png = await toPng(hdRef.current,{
-    pixelRatio:4,
-    cacheBust:true,
-    backgroundColor:"#ffffff"
-});
-      const dataUrl = await toPng(hdRef.current!,{
+const dataUrl = await toPng(hdRef.current!,{
         quality: 1.0,
         pixelRatio: 4, // High resolution
         useCORS: true,
@@ -272,10 +268,18 @@ const png = await toPng(hdRef.current,{
       }
 
       // Download it!
-      const link = document.createElement("a");
-      link.download = `${data.full_name.replace(/\\s+/g, "_")}_NCC_Finalist.png`;
-      link.href = dataUrl;
-      saveAs(blob,"Flyer.png");
+     const link = document.createElement("a");
+
+link.href = dataUrl;
+link.download = `${data.full_name.replace(/\s+/g, "_")}_NCC_Finalist.png`;
+
+document.body.appendChild(link);
+
+// Force browser download
+requestAnimationFrame(() => {
+  link.click();
+  document.body.removeChild(link);
+});
 
       toast.success("Flyer generated and downloaded successfully!", {
         id: generationToast,
@@ -574,7 +578,7 @@ uppercase tracking-widest text-[#D4AF37] uppercase">
     position:"fixed",
     left:"-99999px",
     top:0,
-    opacity:0,
+    opacity:1,
     pointerEvents:"none"
 }}
 >
