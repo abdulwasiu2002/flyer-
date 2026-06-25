@@ -144,16 +144,7 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
         </svg>
 
         {/* White Background Premium Gradient */}
-<div
-  className="absolute inset-0 z-0 pointer-events-none"
-  style={{
-    clipPath: "polygon(48.1% 0,100% 0,100% 100%,35.1% 100%)",
-    background:
-      "linear-gradient(135deg,#ffffff 0%,#fbfcfa 45%,#eef7f0 100%)",
-    opacity: 0.45,
-  }}
-/>
-{/* Watermark */}
+        {/* Watermark */}
 <div
   className="
     absolute
@@ -163,12 +154,55 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
     text-[220px]
     font-black
     text-[#0B5D3B]
-    opacity-[0.03]
+    opacity-[0.05]
     pointer-events-none
     z-0
   "
 >
-  NCC
+       {/* Emerald Ribbon */}
+<div
+className="
+absolute
+top-[120px]
+right-[-150px]
+w-[600px]
+h-[120px]
+rotate-[32deg]
+rounded-full
+bg-[#0B5D3B]
+opacity-[0.12]
+pointer-events-none
+z-[2]
+"
+/>
+
+{/* Gold Ribbon */}
+<div
+className="
+absolute
+top-[520px]
+right-[-170px]
+w-[560px]
+h-[90px]
+rotate-[32deg]
+rounded-full
+bg-[#D4AF37]
+opacity-[0.15]
+pointer-events-none
+z-[2]
+"
+/>
+        <div
+  className="absolute inset-0 z-[1] pointer-events-none"
+  style={{
+    clipPath:"polygon(48.1% 0,100% 0,100% 100%,35.1% 100%)",
+    background:"linear-gradient(135deg,#ffffff 0%,#fbfcfa 45%,#eef7f0 100%)",
+    opacity:0.45,
+  }}
+/>
+
+
+  NETWORKING
 </div>
 
 <div
@@ -429,6 +463,7 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
             </InfoSection>
           </div>
         </div>
+        
         {/* Premium Gold Circles */}
 <div className="absolute top-8 right-8 w-40 h-40 rounded-full border border-[#D4AF37]/20"></div>
 
