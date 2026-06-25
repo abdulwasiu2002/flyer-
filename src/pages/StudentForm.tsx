@@ -174,7 +174,7 @@ export default function StudentForm() {
     const generationToast = toast.loading("Generating your premium flyer...");
 
     try {
-      iif (!hdRef.current) {
+      if (!hdRef.current) {
   throw new Error("HD Preview ref missing");
 }
 
