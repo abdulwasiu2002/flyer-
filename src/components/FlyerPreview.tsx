@@ -1,6 +1,4 @@
 import React, { forwardRef } from 'react';
-import fpbLogo from '../assets/fpb.png';
-import nacosLogo from '../assets/nacos.jpg';
 
 export interface FlyerData {
   full_name: string;
@@ -95,12 +93,6 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(({ dat
 
       {/* Header (Logos & Dept) */}
       <div className="absolute top-[60px] left-[60px] flex items-center gap-4 z-20 w-[400px]">
-        <div className="w-[54px] h-[54px] rounded-full border-[2px] border-[#D4AF37] flex items-center justify-center bg-white shadow-lg overflow-hidden shrink-0">
-          <img src={fpbLogo} alt="FPB Logo" className="w-full h-full object-contain p-1" />
-        </div>
-        <div className="w-[54px] h-[54px] rounded-full border-[2px] border-[#D4AF37] flex items-center justify-center bg-white shadow-lg overflow-hidden shrink-0">
-          <img src={nacosLogo} alt="NACOS Logo" className="w-full h-full object-contain" />
-        </div>
         <div className="flex flex-col">
           <p className="text-white text-[11px] font-['Montserrat'] font-bold tracking-[0.15em] uppercase">Federal Polytechnic Bida</p>
           <p className="text-[#D4AF37] text-[9px] font-['Montserrat'] font-bold tracking-[0.2em] uppercase mt-1">Networking Class of 2026</p>
