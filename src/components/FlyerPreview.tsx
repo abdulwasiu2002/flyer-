@@ -166,22 +166,22 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
         <div className="absolute top-[60px] left-[60px] flex items-center gap-4 z-20 w-[400px]">
           <div className="w-[54px] h-[54px] rounded-full border-[2px] border-[#D4AF37] flex items-center justify-center bg-white shadow-lg overflow-hidden shrink-0">
             <img
-  src="/fpsrc\public\fpb-logo.png.icob-logo.png"
+  src="/fpb-logo.png"
   alt="Federal Polytechnic Bida Logo"
   className="w-full h-full object-contain p-1"
   onError={(e) => {
-    console.error("Logo failed to load");
+    console.error("FPB logo failed to load");
     e.currentTarget.style.display = "none";
   }}
 />
           </div>
           <div className="w-[54px] h-[54px] rounded-full border-[2px] border-[#D4AF37] flex items-center justify-center bg-white shadow-lg overflow-hidden shrink-0">
             <img
-  src="/fpb-lsrc\public\ncc-logo.png.jpgogo.png"
-  alt="Federal Polytechnic Bida Logo"
+  src="/ncc-logo.png"
+  alt="Networking & Cloud Computing Logo"
   className="w-full h-full object-contain p-1"
   onError={(e) => {
-    console.error("Logo failed to load");
+    console.error("NCC logo failed to load");
     e.currentTarget.style.display = "none";
   }}
 />
