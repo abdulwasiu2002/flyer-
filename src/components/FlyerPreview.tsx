@@ -20,6 +20,7 @@ export interface FlyerData {
   flyer_code?: string;
 }
 
+
 interface FlyerPreviewProps {
   data: FlyerData;
   scale?: number;
@@ -216,11 +217,16 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
         <div className="absolute top-[440px] left-[60px] w-[460px] bg-white rounded-[22px] shadow-[0_30px_60px_rgba(0,0,0,0.15)] p-5 pb-8 z-30 border-[2px] border-[#D4AF37]/40">
           <div className="w-full h-[540px] bg-[#F7F7F7] rounded-[14px] overflow-hidden relative">
             {data.photo_url ? (
-              <img
-    src={data.photo_url}
-    onLoad={() => console.log("✅ Student photo loaded")}
-    onError={() => console.error("❌ Student photo failed")}
-              />
+             <img
+  src={data.photo_url}
+  alt="Student"
+  className="w-full h-full object-cover object-top"
+  loading="eager"
+  decoding="sync"
+  crossOrigin="anonymous"
+  onLoad={() => console.log("✅ Student photo loaded")}
+  onError={() => console.error("❌ Student photo failed")}
+/>
             ) : (
               <div className="w-full h-full flex flex-col items-center justify-center text-neutral-400 gap-3">
                 <div className="w-20 h-20 border-2 border-dashed border-neutral-300 rounded-full"></div>

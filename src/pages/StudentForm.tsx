@@ -57,6 +57,7 @@ export default function StudentForm() {
   const [generating, setGenerating] = useState(false);
   const [previewScale, setPreviewScale] = useState(0.5);
   const previewRef = useRef<HTMLDivElement>(null);
+  const hdRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Responsive scale for the preview
@@ -183,12 +184,27 @@ export default function StudentForm() {
       setData(flyerDataWithCode);
 
       // Wait for React to render the code
-      await new Promise((r) => setTimeout(r, 100));
+      await new Promise(resolve=>setTimeout(resolve,500));
 
       // Generate Image
-      const dataUrl = await toPng(previewRef.current, {
+      //await new Promise(r=>setTimeout(r,500));
+      const imgs = hdRef.current!.querySelectorAll("img");
+
+await Promise.all(
+  Array.from(imgs).map((img) => {
+    return new Promise((resolve) => {
+      if (img.complete) {
+        resolve(true);
+      } else {
+        img.onload = () => resolve(true);
+        img.onerror = () => resolve(true);
+      }
+    });
+  })
+);
+      const dataUrl = await toPng(hdRef.current!,{
         quality: 1.0,
-        pixelRatio: 2, // High resolution
+        pixelRatio: 4, // High resolution
         useCORS: true,
         cacheBust: true, // Often helps with cached images throwing CORS
       });
@@ -536,31 +552,36 @@ export default function StudentForm() {
         </div>
 
         {/* Right Preview */}
-        <div className="lg:sticky lg:top-24 h-max pb-12">
-          <h2 className="text-lg font-medium text-neutral-900 mb-4 flex items-center justify-between">
-            Live Preview
-            <span className="text-xs bg-neutral-100 text-neutral-500 px-2 py-1 rounded-md font-mono">
-              1080x1350
-            </span>
-          </h2>
-          <div
-            ref={containerRef}
-            className="w-full bg-neutral-200 rounded-[24px] border border-neutral-300 flex justify-center overflow-hidden shadow-2xl transition-all duration-300 group"
-            style={{ height: 1350 * previewScale }}
-          >
-            <div className="group-hover:scale-[1.01] transition-transform duration-500 origin-top">
-              <FlyerPreview
-                data={{
-                  ...data,
-                  photo_url: localPhotoBase64 || data.photo_url,
-                }}
-                ref={previewRef}
-                scale={previewScale}
-              />
-            </div>
-          </div>
-        </div>
-      </main>
+        <div className="group-hover:scale-[1.01] transition-transform duration-500 origin-top">
+    <FlyerPreview
+        data={{
+            ...data,
+            photo_url: localPhotoBase64 || data.photo_url,
+        }}
+        ref={previewRef}
+        scale={previewScale}
+    />
+</div>
+     <div
+    style={{
+    position:"fixed",
+    left:"-99999px",
+    top:0,
+    opacity:0,
+    pointerEvents:"none"
+}}
+>
+    <FlyerPreview
+        ref={hdRef}
+        data={{
+            ...data,
+            photo_url: localPhotoBase64 || data.photo_url,
+        }}
+        scale={1}
+    />
+</div>
+
+</main>
     </div>
   );
 }
