@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { supabase } from "../lib/supabase";
 
 export default function AdminLogin() {
   const [email, setEmail] = useState("");
@@ -16,21 +17,32 @@ export default function AdminLogin() {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-      const data = await res.json();
-      if (res.ok) {
-        localStorage.setItem("adminToken", data.token);
+      if (supabase) {
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+        if (error) throw error;
+        localStorage.setItem("adminToken", data.session?.access_token || "");
         navigate("/admin");
         toast.success("Login successful");
       } else {
-        toast.error(data.error || "Login failed");
+        const res = await fetch("/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        });
+        const data = await res.json();
+        if (res.ok) {
+          localStorage.setItem("adminToken", data.token);
+          navigate("/admin");
+          toast.success("Login successful");
+        } else {
+          toast.error(data.error || "Login failed");
+        }
       }
-    } catch (err) {
-      toast.error("An error occurred");
+    } catch (err: any) {
+      toast.error(err.message || "An error occurred");
     } finally {
       setLoading(false);
     }
