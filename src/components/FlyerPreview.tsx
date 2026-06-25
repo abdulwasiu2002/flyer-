@@ -99,10 +99,24 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(({ dat
         </div>
       </div>
 
-      {/* Finalist Typography */}
-      <div className="absolute top-[200px] left-[60px] z-20">
-        <h1 className="text-[150px] text-[#D4AF37] font-['Great_Vibes'] leading-[0.8] drop-shadow-2xl pr-10">Finalist</h1>
-        <h2 className="text-[28px] font-['Montserrat'] font-bold tracking-[0.35em] text-white uppercase mt-6 ml-2">Precision '26</h2>
+      {/* FYB Typography block */}
+      <div className="absolute top-[160px] left-[60px] z-20">
+         <div className="flex flex-col">
+            <h2 className="text-[#FFE800] text-[75px] leading-[0.9] font-['Montserrat'] font-medium uppercase tracking-tight">
+              FYB '26
+            </h2>
+            <p className="text-[#E0E0E0] text-[14px] font-['Montserrat'] font-medium italic tracking-widest mt-1">
+              BUILDERS AND FOUNDERS EDITION
+            </p>
+         </div>
+         <div className="mt-1 text-[#FFE800] text-[95px] leading-[0.85] font-['Montserrat'] font-black uppercase tracking-tighter scale-y-[1.1] origin-left">
+            NETWORKING
+         </div>
+         <div className="bg-[#388E3C] text-white px-6 py-2 mt-6 -rotate-2 shadow-2xl inline-block transform origin-left border border-white/10">
+            <span className="text-[15px] font-bold tracking-[0.15em] font-['Montserrat'] uppercase italic drop-shadow-md">
+              STUDENT OF THE WEEK
+            </span>
+         </div>
       </div>
 
       {/* Photo Card */}
