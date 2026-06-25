@@ -35,7 +35,8 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
           transformOrigin: "top left",
           width: 1080,
           height: 1350,
-          backgroundColor: "#F7F7F7",
+         background:
+"linear-gradient(135deg,#ffffff 0%,#fcfcfa 30%,#f6faf7 65%,#eef8f1 100%)",
         }}
         className="relative overflow-hidden shrink-0"
         ref={ref}
@@ -143,16 +144,49 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
           />
         </svg>
 
-        {/* White area decorations */}
-        <div
-          className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
-          style={{
-            clipPath: "polygon(48.1% 0, 100% 0, 100% 100%, 35.1% 100%)",
-          }}
-        >
-          <div className="absolute top-1/2 left-[70%] -translate-x-1/2 -translate-y-1/2 opacity-[0.03] text-[280px] font-['Playfair_Display'] font-bold text-[#0B5D3B] tracking-tighter">
-            NCC
-          </div>
+        {/* White Background Premium Gradient */}
+<div
+  className="absolute inset-0 z-0 pointer-events-none"
+  style={{
+    clipPath: "polygon(48.1% 0,100% 0,100% 100%,35.1% 100%)",
+    background:
+      "linear-gradient(135deg,#ffffff 0%,#fbfcfa 45%,#eef7f0 100%)",
+    opacity: 0.45,
+  }}
+/>
+{/* Watermark */}
+<div
+  className="
+    absolute
+    right-[140px]
+    top-1/2
+    -translate-y-1/2
+    text-[220px]
+    font-black
+    text-[#0B5D3B]
+    opacity-[0.03]
+    pointer-events-none
+    z-0
+  "
+>
+  NCC
+</div>
+
+<div
+  className="absolute right-[80px] top-[220px]
+             w-[180px] h-[180px]
+             rounded-full
+             border
+             border-[#D4AF37]/15"
+/>
+
+<div
+  className="absolute right-[100px] top-[240px]
+             w-[140px] h-[140px]
+             rounded-full
+             border
+             border-[#D4AF37]/10"
+/>
           {/* Subtle network dots */}
           <div
             className="absolute inset-0 opacity-[0.03]"
@@ -169,18 +203,20 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
             <img
   src="/fpb-logo.png"
   alt="FPB Logo"
-  onLoad={() => console.log("✅ FPB logo loaded")}
-  onError={() => console.error("❌ FPB logo failed")}
   className="w-full h-full object-contain p-1"
+  loading="eager"
+  decoding="sync"
+  crossOrigin="anonymous"
 />
           </div>
           <div className="w-[54px] h-[54px] rounded-full border-[2px] border-[#D4AF37] flex items-center justify-center bg-white shadow-lg overflow-hidden shrink-0">
             <img
   src="/ncc-logo.png"
   alt="NCC Logo"
-  onLoad={() => console.log("✅ NCC logo loaded")}
-  onError={() => console.error("❌ NCC logo failed")}
   className="w-full h-full object-contain p-1"
+  loading="eager"
+  decoding="sync"
+  crossOrigin="anonymous"
 />
           </div>
           <div className="flex flex-col">
@@ -342,8 +378,11 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
         </div>
 
         {/* Right Column Information Card */}
-        <div className="absolute top-[80px] right-[60px] w-[460px] bg-white rounded-[24px] shadow-[0_20px_50px_rgba(0,0,0,0.06)] p-10 z-20 border border-white/50 backdrop-blur-sm">
+        <div className="absolute top-[80px] right-[60px] w-[460px] bg-white rounded-[24px] shadow-[0_25px_70px_rgba(0,0,0,0.08),0_0_80px_rgba(212,175,55,0.06)] p-10 z-20 border border-white/50 backdrop-blur-sm"
           <div className="flex flex-col gap-[28px]">
+            <div
+  className="absolute top-[80px] right-[60px] w-[460px] bg-white rounded-[24px] shadow-[0_25px_70px_rgba(0,0,0,0.08),0_0_80px_rgba(212,175,55,0.06)] p-10 z-20 border border-white/50 backdrop-blur-sm"
+>
             <InfoSection title="Personal Profile">
               <DetailRow label="State of Origin" value={data.state_of_origin} />
               <DetailRow label="Birthday" value={data.birthday} />
@@ -393,6 +432,39 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
             </InfoSection>
           </div>
         </div>
+        {/* Premium Gold Circles */}
+<div className="absolute top-8 right-8 w-40 h-40 rounded-full border border-[#D4AF37]/20"></div>
+
+<div className="absolute top-14 right-14 w-32 h-32 rounded-full border border-[#D4AF37]/15"></div>
+
+<div className="absolute top-20 right-20 w-24 h-24 rounded-full border border-[#D4AF37]/10"></div>
+{/* Networking Decoration */}
+<svg
+  className="absolute inset-0 opacity-[0.05] pointer-events-none"
+  viewBox="0 0 1080 1350"
+>
+  <circle cx="820" cy="250" r="3" fill="#D4AF37" />
+  <circle cx="910" cy="330" r="3" fill="#D4AF37" />
+  <circle cx="850" cy="430" r="3" fill="#D4AF37" />
+
+  <line
+    x1="820"
+    y1="250"
+    x2="910"
+    y2="330"
+    stroke="#D4AF37"
+    strokeWidth="1"
+  />
+
+  <line
+    x1="910"
+    y1="330"
+    x2="850"
+    y2="430"
+    stroke="#D4AF37"
+    strokeWidth="1"
+  />
+</svg>
 
         {/* Decorative Elegant Curved Gold Accent */}
         <div className="absolute top-[0] right-[0] w-[150px] h-[150px] overflow-hidden z-30 pointer-events-none">
@@ -403,6 +475,36 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
         {/* Tiny geometric shapes low opacity */}
         <div className="absolute bottom-[200px] left-[46%] w-2 h-2 rotate-45 border border-[#D4AF37]/30 z-20 pointer-events-none"></div>
         <div className="absolute top-[100px] left-[52%] w-1.5 h-1.5 rounded-full bg-[#0B5D3B]/10 z-20 pointer-events-none"></div>
+        {/* Bottom Decoration */}
+<div className="absolute bottom-24 right-20 opacity-10">
+
+<svg width="140" height="140">
+
+<circle cx="20" cy="20" r="3" fill="#D4AF37"/>
+
+<circle cx="60" cy="50" r="3" fill="#D4AF37"/>
+
+<circle cx="100" cy="20" r="3" fill="#D4AF37"/>
+
+<line
+x1="20"
+y1="20"
+x2="60"
+y2="50"
+stroke="#D4AF37"
+/>
+
+<line
+x1="60"
+y1="50"
+x2="100"
+y2="20"
+stroke="#D4AF37"
+/>
+
+</svg>
+
+</div>
 
         {/* Premium Footer */}
         <div className="absolute bottom-[50px] right-[60px] w-[460px] z-20 flex items-center justify-between">
