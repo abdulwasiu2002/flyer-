@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { LogOut, Search, Trash2, Download, Eye, Users, FileImage, Calendar, LayoutDashboard } from "lucide-react";
+import { supabase } from "../lib/supabase";
 
 export default function AdminDashboard() {
   const [students, setStudents] = useState<any[]>([]);
@@ -21,19 +22,26 @@ export default function AdminDashboard() {
     }
     
     try {
-      const [studentsRes, statsRes] = await Promise.all([
-        fetch("/api/students", { headers: { Authorization: `Bearer ${token}` } }),
-        fetch("/api/stats", { headers: { Authorization: `Bearer ${token}` } })
-      ]);
+      if (supabase) {
+        const { data, error } = await supabase.from('students').select('*').order('created_at', { ascending: false });
+        if (error) throw error;
+        setStudents(data || []);
+        setStats({ totalStudents: data?.length || 0, todaysFlyers: data?.length || 0, downloads: data?.length || 0 });
+      } else {
+        const [studentsRes, statsRes] = await Promise.all([
+          fetch("/api/students", { headers: { Authorization: `Bearer ${token}` } }),
+          fetch("/api/stats", { headers: { Authorization: `Bearer ${token}` } })
+        ]);
 
-      if (studentsRes.status === 401 || statsRes.status === 401) {
-        localStorage.removeItem("adminToken");
-        navigate("/admin/login");
-        return;
+        if (studentsRes.status === 401 || statsRes.status === 401) {
+          localStorage.removeItem("adminToken");
+          navigate("/admin/login");
+          return;
+        }
+
+        setStudents(await studentsRes.json());
+        setStats(await statsRes.json());
       }
-
-      setStudents(await studentsRes.json());
-      setStats(await statsRes.json());
     } catch (err) {
       toast.error("Failed to load dashboard data");
     }
@@ -51,15 +59,22 @@ export default function AdminDashboard() {
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this record?")) return;
     
-    const token = localStorage.getItem("adminToken");
     try {
-      const res = await fetch(`/api/students/${id}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      if (res.ok) {
-        toast.success("Record deleted");
-        loadData();
+      if (supabase) {
+         const { error } = await supabase.from('students').delete().eq('id', id);
+         if (error) throw error;
+         toast.success("Record deleted");
+         loadData();
+      } else {
+        const token = localStorage.getItem("adminToken");
+        const res = await fetch(`/api/students/${id}`, {
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        if (res.ok) {
+          toast.success("Record deleted");
+          loadData();
+        }
       }
     } catch (err) {
       toast.error("Failed to delete record");

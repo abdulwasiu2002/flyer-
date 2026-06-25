@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { UploadCloud, Download, Loader2 } from "lucide-react";
 import { motion } from "motion/react";
+import { supabase } from "../lib/supabase";
 
 export default function StudentForm() {
   const [data, setData] = useState<FlyerData>({
@@ -72,16 +73,33 @@ export default function StudentForm() {
 
     const uploadToast = toast.loading("Uploading photo...");
     try {
-      const res = await fetch("/api/upload", {
-        method: "POST",
-        body: formData,
-      });
-      const json = await res.json();
-      if (res.ok) {
-        setData((prev) => ({ ...prev, photo_url: json.url }));
+      if (supabase) {
+        const fileExt = file.name.split('.').pop();
+        const fileName = `${Math.random()}.${fileExt}`;
+        const { error } = await supabase.storage
+          .from('photos')
+          .upload(fileName, file);
+        
+        if (error) throw error;
+        
+        const { data: { publicUrl } } = supabase.storage
+          .from('photos')
+          .getPublicUrl(fileName);
+          
+        setData((prev) => ({ ...prev, photo_url: publicUrl }));
         toast.success("Photo uploaded successfully!", { id: uploadToast });
       } else {
-        toast.error(json.error || "Upload failed", { id: uploadToast });
+        const res = await fetch("/api/upload", {
+          method: "POST",
+          body: formData,
+        });
+        const json = await res.json();
+        if (res.ok) {
+          setData((prev) => ({ ...prev, photo_url: json.url }));
+          toast.success("Photo uploaded successfully!", { id: uploadToast });
+        } else {
+          toast.error(json.error || "Upload failed", { id: uploadToast });
+        }
       }
     } catch (err) {
       toast.error("Upload failed. Try again.", { id: uploadToast });
@@ -118,23 +136,45 @@ export default function StudentForm() {
 
       toast.loading("Saving to server...", { id: generationToast });
 
-      // Upload Flyer
-      const flyerRes = await fetch("/api/upload-flyer", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ imageData: dataUrl }),
-      });
-      const flyerJson = await flyerRes.json();
-      const flyer_url = flyerJson.url;
+      let flyer_url = "";
+      if (supabase) {
+        // Supabase upload
+        const blob = await (await fetch(dataUrl)).blob();
+        const fileName = `flyer-${Date.now()}.png`;
+        const { error: uploadError } = await supabase.storage
+          .from('flyers')
+          .upload(fileName, blob);
+        if (uploadError) throw uploadError;
+        
+        const { data: { publicUrl } } = supabase.storage
+          .from('flyers')
+          .getPublicUrl(fileName);
+        flyer_url = publicUrl;
 
-      // Save to database
-      const saveRes = await fetch("/api/students", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...flyerDataWithCode, flyer_url }),
-      });
-      
-      if (!saveRes.ok) throw new Error("Failed to save data");
+        const { error: dbError } = await supabase
+          .from('students')
+          .insert([{ ...flyerDataWithCode, flyer_url, id: crypto.randomUUID() }]);
+        
+        if (dbError) throw dbError;
+      } else {
+        // Upload Flyer via API
+        const flyerRes = await fetch("/api/upload-flyer", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ imageData: dataUrl }),
+        });
+        const flyerJson = await flyerRes.json();
+        flyer_url = flyerJson.url;
+
+        // Save to database
+        const saveRes = await fetch("/api/students", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...flyerDataWithCode, flyer_url }),
+        });
+        
+        if (!saveRes.ok) throw new Error("Failed to save data");
+      }
 
       // Download it!
       const link = document.createElement("a");
