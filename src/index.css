@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&family=Poppins:wght@400;600;800&family=Montserrat:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Great+Vibes&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Oswald:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&family=Poppins:wght@400;600;800&family=Montserrat:wght@400;600;700&family=Teko:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -7,6 +7,9 @@
   --font-serif: "Playfair Display", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-poppins: "Poppins", ui-sans-serif, system-ui, sans-serif;
   --font-montserrat: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-bebas: "Bebas Neue", ui-sans-serif, system-ui, sans-serif;
+  --font-teko: "Teko", ui-sans-serif, system-ui, sans-serif;
+  --font-oswald: "Oswald", ui-sans-serif, system-ui, sans-serif;
 }
 
 @layer base {
