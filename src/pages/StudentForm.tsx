@@ -316,7 +316,9 @@ await Promise.all(
           <div className="space-y-6 bg-white p-6 rounded-2xl shadow-sm border border-neutral-100">
             {/* Personal Info */}
             <div className="space-y-4">
-              <h3 className="text-sm font-bold tracking-widest text-[#D4AF37] uppercase">
+              <h3 className="text-sm font-semibold
+tracking-[0.08em]
+uppercase tracking-widest text-[#D4AF37] uppercase">
                 Personal Information
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
