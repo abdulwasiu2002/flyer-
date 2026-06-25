@@ -191,17 +191,21 @@ export default function StudentForm() {
       const imgs = hdRef.current!.querySelectorAll("img");
 
 await Promise.all(
-  Array.from(imgs).map((img) => {
-    return new Promise((resolve) => {
-      if (img.complete) {
-        resolve(true);
-      } else {
-        img.onload = () => resolve(true);
-        img.onerror = () => resolve(true);
-      }
+  Array.from(hdRef.current.querySelectorAll("img")).map(img=>{
+    if(img.complete) return Promise.resolve();
+
+    return new Promise(resolve=>{
+      img.onload=resolve;
+      img.onerror=resolve;
     });
   })
 );
+
+const png = await toPng(hdRef.current,{
+    pixelRatio:4,
+    cacheBust:true,
+    backgroundColor:"#ffffff"
+});
       const dataUrl = await toPng(hdRef.current!,{
         quality: 1.0,
         pixelRatio: 4, // High resolution
@@ -270,7 +274,7 @@ await Promise.all(
       const link = document.createElement("a");
       link.download = `${data.full_name.replace(/\\s+/g, "_")}_NCC_Finalist.png`;
       link.href = dataUrl;
-      link.click();
+      saveAs(blob,"Flyer.png");
 
       toast.success("Flyer generated and downloaded successfully!", {
         id: generationToast,
