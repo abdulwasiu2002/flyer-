@@ -164,7 +164,7 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
         </div>
 
         {/* Header (Logos & Dept) */}
-        <div className="absolute top-[60px] left-[60px] flex items-center gap-4 z-20 w-[400px]">
+        <div className="absolute top-[60px] left-[60px] flex flex-col z-20 w-[520px]">
           <div className="w-[54px] h-[54px] rounded-full border-[2px] border-[#D4AF37] flex items-center justify-center bg-white shadow-lg overflow-hidden shrink-0">
             <img
   src="/fpb-logo.png"
@@ -228,6 +228,7 @@ text-[#cfcfcf]
 font-medium
 mt-2
 ">
+  <div className="
              <p
   className="
     uppercase
@@ -238,7 +239,7 @@ mt-2
     mt-3
     font-medium
   "
->
+
   BUILDERS AND FOUNDERS EDITION
 </p>
           </div>
