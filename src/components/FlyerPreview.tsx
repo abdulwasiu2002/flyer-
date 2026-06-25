@@ -194,18 +194,93 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
         </div>
 
         {/* FYB Typography block */}
-        <div className="absolute top-[160px] left-[60px] z-20 w-[460px]">
+        <div className="
+font-['Cormorant_Garamond']
+italic
+font-bold
+text-[78px]
+text-[#D4AF37]
+leading-none
+tracking-tight
+drop-shadow-lg
+">
           <div className="flex flex-col">
-            <h2 className="text-[#FFE800] text-[110px] leading-[0.85] font-teko font-semibold uppercase tracking-wide drop-shadow-md">
-              FYB '26
-            </h2>
-            <p className="text-[#E0E0E0] text-[14px] font-['Montserrat'] font-medium italic tracking-widest mt-2">
-              BUILDERS AND FOUNDERS EDITION
-            </p>
+            <h2
+  className="
+    font-['Cormorant_Garamond']
+    italic
+    font-bold
+    text-[82px]
+    text-[#D4AF37]
+    leading-none
+    tracking-tight
+    drop-shadow-lg
+  "
+>
+  FYB '26
+</h2>
+            <p className="
+uppercase
+italic
+tracking-[0.35em]
+text-[14px]
+text-[#cfcfcf]
+font-medium
+mt-2
+">
+             <p
+  className="
+    uppercase
+    italic
+    tracking-[0.35em]
+    text-[13px]
+    text-[#D7D7D7]
+    mt-3
+    font-medium
+  "
+>
+  BUILDERS AND FOUNDERS EDITION
+</p>
           </div>
-          <div className="mt-2 text-[#FFE800] text-[120px] leading-[0.8] font-teko font-bold uppercase tracking-normal drop-shadow-lg scale-y-[1.1] origin-left">
-            NETWORKING
-          </div>
+         <div
+  className="
+    mt-4
+    text-[#FFE600]
+    text-[92px]
+    leading-[0.82]
+    font-teko
+    font-bold
+    uppercase
+    tracking-tight
+    drop-shadow-lg
+  "
+>
+            NETWORKING 
+            </div>
+
+           <p
+  className="
+    uppercase
+    text-white
+    text-[18px]
+    font-semibold
+    tracking-[0.35em]
+    mt-1
+  "
+>
+  & CLOUD COMPUTING
+</p>
+
+<div
+  className="
+    w-[170px]
+    h-[5px]
+    bg-[#D4AF37]
+    rounded-full
+    mt-5
+  "
+/>
+          
           <div className="bg-[#388E3C] text-white px-6 py-2 mt-8 -rotate-2 shadow-2xl inline-block transform origin-left border border-white/10">
             <span className="text-[15px] font-bold tracking-[0.15em] font-['Montserrat'] uppercase italic drop-shadow-md">
               STUDENT OF THE WEEK
