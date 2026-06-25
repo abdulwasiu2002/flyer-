@@ -167,23 +167,19 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
           <div className="w-[54px] h-[54px] rounded-full border-[2px] border-[#D4AF37] flex items-center justify-center bg-white shadow-lg overflow-hidden shrink-0">
             <img
   src="/fpb-logo.png"
-  alt="Federal Polytechnic Bida Logo"
+  alt="FPB Logo"
+  onLoad={() => console.log("✅ FPB logo loaded")}
+  onError={() => console.error("❌ FPB logo failed")}
   className="w-full h-full object-contain p-1"
-  onError={(e) => {
-    console.error("FPB logo failed to load");
-    e.currentTarget.style.display = "none";
-  }}
 />
           </div>
           <div className="w-[54px] h-[54px] rounded-full border-[2px] border-[#D4AF37] flex items-center justify-center bg-white shadow-lg overflow-hidden shrink-0">
             <img
   src="/ncc-logo.png"
-  alt="Networking & Cloud Computing Logo"
+  alt="NCC Logo"
+  onLoad={() => console.log("✅ NCC logo loaded")}
+  onError={() => console.error("❌ NCC logo failed")}
   className="w-full h-full object-contain p-1"
-  onError={(e) => {
-    console.error("NCC logo failed to load");
-    e.currentTarget.style.display = "none";
-  }}
 />
           </div>
           <div className="flex flex-col">
@@ -221,10 +217,9 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
           <div className="w-full h-[540px] bg-[#F7F7F7] rounded-[14px] overflow-hidden relative">
             {data.photo_url ? (
               <img
-                src={data.photo_url}
-                alt="Passport"
-                className="w-full h-full object-cover object-top"
-                crossOrigin="anonymous"
+    src={data.photo_url}
+    onLoad={() => console.log("✅ Student photo loaded")}
+    onError={() => console.error("❌ Student photo failed")}
               />
             ) : (
               <div className="w-full h-full flex flex-col items-center justify-center text-neutral-400 gap-3">
