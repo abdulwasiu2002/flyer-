@@ -97,34 +97,45 @@ export default function StudentForm() {
 
     const uploadToast = toast.loading("Uploading photo...");
     try {
+      let uploadedUrl = "";
+      let supabaseFailed = false;
+
       if (supabase) {
-        const fileExt = file.name.split('.').pop();
-        const fileName = `${Math.random()}.${fileExt}`;
-        const { error } = await supabase.storage
-          .from('photos')
-          .upload(fileName, file);
-        
-        if (error) throw error;
-        
-        const { data: { publicUrl } } = supabase.storage
-          .from('photos')
-          .getPublicUrl(fileName);
+        try {
+          const fileExt = file.name.split('.').pop();
+          const fileName = `${Math.random()}.${fileExt}`;
+          const { error } = await supabase.storage
+            .from('photos')
+            .upload(fileName, file);
           
-        setData((prev) => ({ ...prev, photo_url: publicUrl }));
-        toast.success("Photo uploaded successfully!", { id: uploadToast });
-      } else {
+          if (error) throw error;
+          
+          const { data: { publicUrl } } = supabase.storage
+            .from('photos')
+            .getPublicUrl(fileName);
+            
+          uploadedUrl = publicUrl;
+        } catch (subErr) {
+          console.warn("Supabase upload failed, falling back to local api", subErr);
+          supabaseFailed = true;
+        }
+      }
+
+      if (!supabase || supabaseFailed) {
         const res = await fetch("/api/upload", {
           method: "POST",
           body: formData,
         });
         const json = await res.json();
         if (res.ok) {
-          setData((prev) => ({ ...prev, photo_url: json.url }));
-          toast.success("Photo uploaded successfully!", { id: uploadToast });
+          uploadedUrl = json.url;
         } else {
-          toast.error(json.error || "Upload failed", { id: uploadToast });
+          throw new Error(json.error || "Local upload failed");
         }
       }
+
+      setData((prev) => ({ ...prev, photo_url: uploadedUrl }));
+      toast.success("Photo uploaded successfully!", { id: uploadToast });
     } catch (err: any) {
       toast.error(err.message || "Upload failed. Try again.", { id: uploadToast });
     }
@@ -163,26 +174,36 @@ export default function StudentForm() {
       toast.loading("Saving to server...", { id: generationToast });
 
       let flyer_url = "";
-      if (supabase) {
-        // Supabase upload
-        const blob = await (await fetch(dataUrl)).blob();
-        const fileName = `flyer-${Date.now()}.png`;
-        const { error: uploadError } = await supabase.storage
-          .from('flyers')
-          .upload(fileName, blob);
-        if (uploadError) throw uploadError;
-        
-        const { data: { publicUrl } } = supabase.storage
-          .from('flyers')
-          .getPublicUrl(fileName);
-        flyer_url = publicUrl;
+      let dbErrorOccurred = false;
+      let supabaseFailed = false;
 
-        const { error: dbError } = await supabase
-          .from('students')
-          .insert([{ ...flyerDataWithCode, flyer_url, id: crypto.randomUUID() }]);
-        
-        if (dbError) throw dbError;
-      } else {
+      if (supabase) {
+        try {
+          // Supabase upload
+          const blob = await (await fetch(dataUrl)).blob();
+          const fileName = `flyer-${Date.now()}.png`;
+          const { error: uploadError } = await supabase.storage
+            .from('flyers')
+            .upload(fileName, blob);
+          if (uploadError) throw uploadError;
+          
+          const { data: { publicUrl } } = supabase.storage
+            .from('flyers')
+            .getPublicUrl(fileName);
+          flyer_url = publicUrl;
+
+          const { error: dbError } = await supabase
+            .from('students')
+            .insert([{ ...flyerDataWithCode, flyer_url, id: crypto.randomUUID() }]);
+          
+          if (dbError) throw dbError;
+        } catch (subErr) {
+          console.warn("Supabase generation/upload failed, falling back to local api", subErr);
+          supabaseFailed = true;
+        }
+      }
+
+      if (!supabase || supabaseFailed) {
         // Upload Flyer via API
         const flyerRes = await fetch("/api/upload-flyer", {
           method: "POST",
@@ -199,7 +220,7 @@ export default function StudentForm() {
           body: JSON.stringify({ ...flyerDataWithCode, flyer_url }),
         });
         
-        if (!saveRes.ok) throw new Error("Failed to save data");
+        if (!saveRes.ok) throw new Error("Failed to save data locally");
       }
 
       // Download it!

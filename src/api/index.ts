@@ -50,6 +50,27 @@ router.get("/settings", (req, res) => {
   res.json(settingsMap);
 });
 
+// Proxy image to bypass CORS
+router.get("/proxy-image", async (req, res) => {
+  const imageUrl = req.query.url as string;
+  if (!imageUrl) {
+    return res.status(400).json({ error: "Missing url parameter" });
+  }
+  try {
+    const response = await fetch(imageUrl);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch: ${response.statusText}`);
+    }
+    const buffer = await response.arrayBuffer();
+    const contentType = response.headers.get("content-type") || "image/jpeg";
+    res.setHeader("Content-Type", contentType);
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.send(Buffer.from(buffer));
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Upload endpoint
 router.post("/upload", upload.single("image"), (req, res) => {
   if (!req.file) {
