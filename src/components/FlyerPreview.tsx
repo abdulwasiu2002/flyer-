@@ -166,19 +166,25 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
         <div className="absolute top-[60px] left-[60px] flex items-center gap-4 z-20 w-[400px]">
           <div className="w-[54px] h-[54px] rounded-full border-[2px] border-[#D4AF37] flex items-center justify-center bg-white shadow-lg overflow-hidden shrink-0">
             <img
-              src="/api/proxy-image?url=https://results.fedpolybida.edu.ng/img/favicon.ico"
-              crossOrigin="anonymous"
-              alt="FPB Logo"
-              className="w-full h-full object-contain p-1"
-            />
+  src="/fpsrc\public\fpb-logo.png.icob-logo.png"
+  alt="Federal Polytechnic Bida Logo"
+  className="w-full h-full object-contain p-1"
+  onError={(e) => {
+    console.error("Logo failed to load");
+    e.currentTarget.style.display = "none";
+  }}
+/>
           </div>
           <div className="w-[54px] h-[54px] rounded-full border-[2px] border-[#D4AF37] flex items-center justify-center bg-white shadow-lg overflow-hidden shrink-0">
             <img
-              src="/api/proxy-image?url=https://nacos.org.ng/img/about.jpg"
-              crossOrigin="anonymous"
-              alt="NACOS Logo"
-              className="w-full h-full object-cover"
-            />
+  src="/fpb-lsrc\public\ncc-logo.png.jpgogo.png"
+  alt="Federal Polytechnic Bida Logo"
+  className="w-full h-full object-contain p-1"
+  onError={(e) => {
+    console.error("Logo failed to load");
+    e.currentTarget.style.display = "none";
+  }}
+/>
           </div>
           <div className="flex flex-col">
             <p className="text-white text-[11px] font-['Montserrat'] font-bold tracking-[0.15em] uppercase">
