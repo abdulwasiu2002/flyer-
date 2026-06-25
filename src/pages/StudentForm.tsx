@@ -101,8 +101,8 @@ export default function StudentForm() {
           toast.error(json.error || "Upload failed", { id: uploadToast });
         }
       }
-    } catch (err) {
-      toast.error("Upload failed. Try again.", { id: uploadToast });
+    } catch (err: any) {
+      toast.error(err.message || "Upload failed. Try again.", { id: uploadToast });
     }
   };
 
