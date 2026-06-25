@@ -11,6 +11,22 @@ import { UploadCloud, Download, Loader2 } from "lucide-react";
 import { motion } from "motion/react";
 import { supabase } from "../lib/supabase";
 
+const urlToBase64 = async (url: string) => {
+  try {
+    const res = await fetch(url);
+    const blob = await res.blob();
+    return new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  } catch (e) {
+    console.error("Failed to convert image to base64", url, e);
+    return url;
+  }
+};
+
 export default function StudentForm() {
   const [data, setData] = useState<FlyerData>({
     full_name: "",
@@ -140,6 +156,8 @@ export default function StudentForm() {
       const dataUrl = await toPng(previewRef.current, {
         quality: 1.0,
         pixelRatio: 2, // High resolution
+        useCORS: true,
+        cacheBust: true, // Often helps with cached images throwing CORS
       });
 
       toast.loading("Saving to server...", { id: generationToast });
