@@ -164,7 +164,7 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
         </div>
 
         {/* Header (Logos & Dept) */}
-        <div className="absolute top-[60px] left-[60px] flex flex-col z-20 w-[520px]">
+        <div className="absolute className="absolute top-[60px] left-[60px] flex items-center gap-4 z-20 w-[520px]"top-[60px] left-[60px] flex flex-col z-20 w-[520px]">
           <div className="w-[54px] h-[54px] rounded-full border-[2px] border-[#D4AF37] flex items-center justify-center bg-white shadow-lg overflow-hidden shrink-0">
             <img
   src="/fpb-logo.png"
@@ -192,102 +192,82 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
             </p>
           </div>
         </div>
+        {/* FYB Typography Block */}
+<div className="absolute top-[160px] left-[60px] z-20 w-[520px]">
 
-        {/* FYB Typography block */}
-        <div className="
-font-['Cormorant_Garamond']
-italic
-font-bold
-text-[78px]
-text-[#D4AF37]
-leading-none
-tracking-tight
-drop-shadow-lg
-">
-          <div className="flex flex-col">
-            <h2
-  className="
-    font-['Cormorant_Garamond']
-    italic
-    font-bold
-    text-[82px]
-    text-[#D4AF37]
-    leading-none
-    tracking-tight
-    drop-shadow-lg
-  "
->
-  FYB '26
-</h2>
-            <p className="
-uppercase
-italic
-tracking-[0.35em]
-text-[14px]
-text-[#cfcfcf]
-font-medium
-mt-2
-">
-  <div className="
-             <p
-  className="
-    uppercase
-    italic
-    tracking-[0.35em]
-    text-[13px]
-    text-[#D7D7D7]
-    mt-3
-    font-medium
-  "
+  {/* FYB */}
+  <h2
+    className="
+      font-['Cormorant_Garamond']
+      italic
+      font-bold
+      text-[82px]
+      text-[#D4AF37]
+      leading-none
+      tracking-tight
+      drop-shadow-lg
+    "
+  >
+    FYB '26
+  </h2>
 
-  BUILDERS AND FOUNDERS EDITION
-</p>
-          </div>
-         <div
-  className="
-    mt-4
-    text-[#FFE600]
-    text-[92px]
-    leading-[0.82]
-    font-teko
-    font-bold
-    uppercase
-    tracking-tight
-    drop-shadow-lg
-  "
->
-            NETWORKING 
-            </div>
+  {/* Subtitle */}
+  <p
+    className="
+      uppercase
+      italic
+      tracking-[0.35em]
+      text-[13px]
+      text-[#D7D7D7]
+      mt-3
+      font-medium
+    "
+  >
+    BUILDERS AND FOUNDERS EDITION
+  </p>
 
-           <p
-  className="
-    uppercase
-    text-white
-    text-[18px]
-    font-semibold
-    tracking-[0.35em]
-    mt-1
-  "
->
-  & CLOUD COMPUTING
-</p>
+  {/* Department */}
+  <h1
+    className="
+      mt-6
+      font-teko
+      font-bold
+      uppercase
+      text-[#FFE600]
+      text-[90px]
+      leading-[0.82]
+      tracking-tight
+      drop-shadow-lg
+    "
+  >
+    NETWORKING
+  </h1>
 
-<div
-  className="
-    w-[170px]
-    h-[5px]
-    bg-[#D4AF37]
-    rounded-full
-    mt-5
-  "
-/>
-          
-          <div className="bg-[#388E3C] text-white px-6 py-2 mt-8 -rotate-2 shadow-2xl inline-block transform origin-left border border-white/10">
-            <span className="text-[15px] font-bold tracking-[0.15em] font-['Montserrat'] uppercase italic drop-shadow-md">
-              STUDENT OF THE WEEK
-            </span>
-          </div>
-        </div>
+  <p
+    className="
+      uppercase
+      text-white
+      font-semibold
+      tracking-[0.35em]
+      text-[18px]
+      mt-2
+    "
+  >
+    &amp; CLOUD COMPUTING
+  </p>
+
+  {/* Gold line */}
+  <div className="w-[180px] h-[5px] bg-[#D4AF37] rounded-full mt-5"></div>
+
+  {/* Badge */}
+  <div className="inline-block mt-8 bg-[#388E3C] text-white px-6 py-2 rounded-md shadow-lg border border-[#D4AF37]/40 rotate-[-2deg]">
+    <span className="uppercase tracking-[0.18em] text-[15px] font-bold italic">
+      STUDENT OF THE WEEK
+    </span>
+  </div>
+
+</div>
+
 
         {/* Photo Card */}
         <div className="absolute top-[440px] left-[60px] w-[460px] bg-white rounded-[22px] shadow-[0_30px_60px_rgba(0,0,0,0.15)] p-5 pb-8 z-30 border-[2px] border-[#D4AF37]/40">
