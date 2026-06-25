@@ -115,14 +115,13 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
           </defs>
 
           {/* White area */}
-          <polygon points="520,0 1080,0 1080,1350 380,1350" fill="#F7F7F7" />
+          <polygon points="520,0 1080,0 1080,1350 380,1350"  />
 
           {/* Stripes only on white area */}
-          <polygon
-            points="520,0 1080,0 1080,1350 380,1350"
-            fill="url(#diagonalStripes)"
-          />
-
+         <polygon
+  points="520,0 1080,0 1080,1350 380,1350"
+  fill="#FFFFFF"
+/>
           {/* Gold Divider line with glow */}
           <line
             x1="520"
@@ -179,7 +178,6 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
              border
              border-[#D4AF37]/15"
 />
-
 <div
   className="absolute right-[100px] top-[240px]
              w-[140px] h-[140px]
@@ -195,7 +193,7 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
               backgroundSize: "30px 30px",
             }}
           ></div>
-        </div>
+        
 
         {/* Header (Logos & Dept) */}
         <div className="absolute top-[60px] left-[60px] flex items-center gap-4 z-20 w-[520px]">
@@ -378,11 +376,10 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
         </div>
 
         {/* Right Column Information Card */}
-        <div className="absolute top-[80px] right-[60px] w-[460px] bg-white rounded-[24px] shadow-[0_25px_70px_rgba(0,0,0,0.08),0_0_80px_rgba(212,175,55,0.06)] p-10 z-20 border border-white/50 backdrop-blur-sm"
-          <div className="flex flex-col gap-[28px]">
-            <div
+        <div
   className="absolute top-[80px] right-[60px] w-[460px] bg-white rounded-[24px] shadow-[0_25px_70px_rgba(0,0,0,0.08),0_0_80px_rgba(212,175,55,0.06)] p-10 z-20 border border-white/50 backdrop-blur-sm"
 >
+  <div className="flex flex-col gap-[28px]">
             <InfoSection title="Personal Profile">
               <DetailRow label="State of Origin" value={data.state_of_origin} />
               <DetailRow label="Birthday" value={data.birthday} />
