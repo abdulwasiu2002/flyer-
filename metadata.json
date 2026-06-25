@@ -1,0 +1,6 @@
+{
+  "name": "NCC Finalist Flyer Generator",
+  "description": "Generate premium finalist flyers for the Department of Networking & Cloud Computing, Federal Polytechnic Bida. Students can generate their personalized flyers, and administrators can manage records.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
