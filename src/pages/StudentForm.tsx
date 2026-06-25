@@ -31,6 +31,7 @@ export default function StudentForm() {
     photo_url: "",
   });
 
+  const [localPhotoBase64, setLocalPhotoBase64] = useState<string>("");
   const [generating, setGenerating] = useState(false);
   const [previewScale, setPreviewScale] = useState(0.5);
   const previewRef = useRef<HTMLDivElement>(null);
@@ -67,6 +68,13 @@ export default function StudentForm() {
       toast.error("File is too large. Max size is 5MB");
       return;
     }
+
+    // Set local base64 preview immediately to avoid CORS issues with html-to-image
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setLocalPhotoBase64(e.target?.result as string);
+    };
+    reader.readAsDataURL(file);
 
     const formData = new FormData();
     formData.append("image", file);
@@ -363,7 +371,7 @@ export default function StudentForm() {
             style={{ height: 1350 * previewScale }}
           >
             <div className="group-hover:scale-[1.01] transition-transform duration-500 origin-top">
-              <FlyerPreview data={data} ref={previewRef} scale={previewScale} />
+              <FlyerPreview data={{ ...data, photo_url: localPhotoBase64 || data.photo_url }} ref={previewRef} scale={previewScale} />
             </div>
           </div>
         </div>

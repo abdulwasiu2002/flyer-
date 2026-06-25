@@ -115,7 +115,7 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(({ dat
       <div className="absolute top-[440px] left-[60px] w-[460px] bg-white rounded-[22px] shadow-[0_30px_60px_rgba(0,0,0,0.15)] p-5 pb-8 z-30 border-[2px] border-[#D4AF37]/40">
          <div className="w-full h-[540px] bg-[#F7F7F7] rounded-[14px] overflow-hidden relative">
             {data.photo_url ? (
-              <img src={data.photo_url} alt="Passport" className="w-full h-full object-cover object-top" />
+              <img src={data.photo_url} alt="Passport" className="w-full h-full object-cover object-top" crossOrigin="anonymous" />
             ) : (
               <div className="w-full h-full flex flex-col items-center justify-center text-neutral-400 gap-3">
                  <div className="w-20 h-20 border-2 border-dashed border-neutral-300 rounded-full"></div>
