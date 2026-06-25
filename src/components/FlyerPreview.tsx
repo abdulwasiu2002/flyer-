@@ -94,10 +94,10 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(({ dat
       {/* Header (Logos & Dept) */}
       <div className="absolute top-[60px] left-[60px] flex items-center gap-4 z-20 w-[400px]">
         <div className="w-[54px] h-[54px] rounded-full border-[2px] border-[#D4AF37] flex items-center justify-center bg-white shadow-lg overflow-hidden shrink-0">
-          <img src="/fpb.png" alt="FPB Logo" className="w-full h-full object-contain p-1" crossOrigin="anonymous" />
+          <img src="/fpb.png" alt="FPB Logo" className="w-full h-full object-contain p-1" />
         </div>
         <div className="w-[54px] h-[54px] rounded-full border-[2px] border-[#D4AF37] flex items-center justify-center bg-white shadow-lg overflow-hidden shrink-0">
-          <img src="/nacos.jpg" alt="NACOS Logo" className="w-full h-full object-contain" crossOrigin="anonymous" />
+          <img src="/nacos.jpg" alt="NACOS Logo" className="w-full h-full object-contain" />
         </div>
         <div className="flex flex-col">
           <p className="text-white text-[11px] font-['Montserrat'] font-bold tracking-[0.15em] uppercase">Federal Polytechnic Bida</p>
@@ -115,7 +115,7 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(({ dat
       <div className="absolute top-[440px] left-[60px] w-[460px] bg-white rounded-[22px] shadow-[0_30px_60px_rgba(0,0,0,0.15)] p-5 pb-8 z-30 border-[2px] border-[#D4AF37]/40">
          <div className="w-full h-[540px] bg-[#F7F7F7] rounded-[14px] overflow-hidden relative">
             {data.photo_url ? (
-              <img src={data.photo_url} alt="Passport" className="w-full h-full object-cover object-top" crossOrigin="anonymous" />
+              <img src={data.photo_url} alt="Passport" className="w-full h-full object-cover object-top" />
             ) : (
               <div className="w-full h-full flex flex-col items-center justify-center text-neutral-400 gap-3">
                  <div className="w-20 h-20 border-2 border-dashed border-neutral-300 rounded-full"></div>

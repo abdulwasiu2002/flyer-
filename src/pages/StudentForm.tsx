@@ -144,8 +144,9 @@ export default function StudentForm() {
 
       toast.success("Flyer generated and downloaded successfully!", { id: generationToast });
     } catch (err: any) {
-      console.error(err);
-      toast.error("Failed to generate flyer. " + err.message, { id: generationToast });
+      console.error("GENERATION ERROR", err);
+      const errMsg = err?.message || typeof err === 'string' ? err : JSON.stringify(err);
+      toast.error("Failed to generate flyer. " + errMsg, { id: generationToast });
     } finally {
       setGenerating(false);
     }
