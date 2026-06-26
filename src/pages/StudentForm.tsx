@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { toPng } from "html-to-image";
+import html2canvas from "html2canvas";
 import { FlyerPreview, FlyerData } from "../components/FlyerPreview";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -203,13 +203,20 @@ await Promise.all(
   })
 );
 
-const dataUrl = await toPng(hdRef.current!, {
-  pixelRatio: 4,
-  cacheBust: true,
+// Wait for fonts to be ready
+await document.fonts.ready;
+
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const pixelRatio = isIOS ? 2 : 4;
+
+const canvas = await html2canvas(hdRef.current!, {
+  scale: pixelRatio,
+  useCORS: true,
+  allowTaint: true,
   backgroundColor: "#ffffff",
-  quality: 1,
-  skipFonts: true,
+  logging: false,
 });
+const dataUrl = canvas.toDataURL("image/png", 1.0);
       toast.loading("Saving to server...", { id: generationToast });
 
       let flyer_url = "";
@@ -268,25 +275,15 @@ const dataUrl = await toPng(hdRef.current!, {
       }
 
       // Download it!
-     const isIOS =
-  /iPad|iPhone|iPod/.test(navigator.userAgent);
-
-if (isIOS) {
-  window.open(dataUrl, "_blank");
-} else {
-  const link = document.createElement("a");
-  link.href = dataUrl;
-  link.download = `${data.full_name.replace(/\s+/g, "_")}_NCC_Finalist.png`;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-}
-
-// Force browser download
-requestAnimationFrame(() => {
-  link.click();
-  document.body.removeChild(link);
-});
+      const link = document.createElement("a");
+      link.href = dataUrl;
+      link.download = `${data.full_name.replace(/\s+/g, "_")}_NCC_Finalist.png`;
+      if (isIOS) {
+        link.target = "_blank";
+      }
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
 
       toast.success("Flyer generated and downloaded successfully!", {
         id: generationToast,

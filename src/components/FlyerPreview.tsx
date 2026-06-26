@@ -213,20 +213,22 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
         <div className="absolute top-[60px] left-[60px] flex items-center gap-4 z-20 w-[520px]">
           <div className="w-[54px] h-[54px] rounded-full border-[2px] border-[#D4AF37] flex items-center justify-center bg-white shadow-lg overflow-hidden shrink-0">
             <img
-  src="/fpb-logo.png"
+  src="/api/proxy-image?url=https://results.fedpolybida.edu.ng/img/favicon.ico"
   alt="FPB Logo"
   className="w-full h-full object-contain p-1"
   loading="eager"
   decoding="sync"
+  crossOrigin="anonymous"
 />
           </div>
           <div className="w-[54px] h-[54px] rounded-full border-[2px] border-[#D4AF37] flex items-center justify-center bg-white shadow-lg overflow-hidden shrink-0">
             <img
-  src="/ncc-logo.png"
+  src="/api/proxy-image?url=https://nacos.org.ng/img/about.jpg"
   alt="NCC Logo"
   className="w-full h-full object-contain p-1"
   loading="eager"
   decoding="sync"
+  crossOrigin="anonymous"
 />
           </div>
           <div className="flex flex-col">
@@ -388,9 +390,13 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
 
         {/* Right Column Information Card */}
         <div
-  className="absolute top-[80px] right-[60px] w-[460px] bg-white rounded-[24px] shadow-[0_25px_70px_rgba(0,0,0,0.08),0_0_80px_rgba(212,175,55,0.06)] p-10 z-20 border border-white/50 backdrop-blur-sm"
->
-  <div className="flex flex-col gap-[28px]">
+          className="absolute top-[70px] right-[50px] w-[480px] bg-white/95 rounded-[24px] shadow-[0_25px_70px_rgba(0,0,0,0.12),0_0_80px_rgba(11,93,59,0.08)] p-8 z-20 border-2 border-[#D4AF37]/30 backdrop-blur-md overflow-hidden"
+        >
+          {/* Subtle card background decoration */}
+          <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "repeating-linear-gradient(45deg, #0B5D3B 0, #0B5D3B 1px, transparent 0, transparent 50%)", backgroundSize: "10px 10px" }}></div>
+          <div className="absolute -top-[50px] -right-[50px] w-[150px] h-[150px] bg-[#D4AF37]/10 rounded-full blur-[2xl]"></div>
+          
+          <div className="flex flex-col gap-[18px] relative z-10">
             <InfoSection title="Personal Profile">
               <DetailRow label="State of Origin" value={data.state_of_origin} />
               <DetailRow label="Birthday" value={data.birthday} />
@@ -568,16 +574,16 @@ function InfoSection({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col gap-4 relative">
+    <div className="flex flex-col gap-2 relative">
       {/* Section Header */}
-      <div className="flex items-center gap-3">
-        <div className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]"></div>
-        <h3 className="text-[13px] font-['Playfair_Display'] font-bold text-[#D4AF37] uppercase tracking-[0.2em]">
+      <div className="flex items-center gap-2.5 mb-1">
+        <div className="w-2 h-2 rounded-sm rotate-45 bg-[#0B5D3B]"></div>
+        <h3 className="text-[14px] font-['Montserrat'] font-black text-[#0B5D3B] uppercase tracking-[0.2em] italic">
           {title}
         </h3>
-        <div className="flex-1 h-[1px] bg-gradient-to-r from-[#D4AF37]/40 to-transparent"></div>
+        <div className="flex-1 h-[2px] bg-gradient-to-r from-[#D4AF37]/80 to-transparent"></div>
       </div>
-      <div className="flex flex-col gap-4 pl-4">{children}</div>
+      <div className="flex flex-col gap-2">{children}</div>
     </div>
   );
 }
@@ -594,15 +600,20 @@ function DetailRow({
   const displayValue = value && value !== " / " ? value : "-";
 
   return (
-    <div className="flex flex-col gap-1">
-      <span className="text-[10px] font-['Montserrat'] font-semibold text-[#1E1E1E]/60 uppercase tracking-[0.15em]">
-        {label} :
-      </span>
-      <span
-        className={`text-[14px] font-['Inter'] ${isQuote ? "font-medium italic leading-snug" : "font-semibold"} text-[#1E1E1E] uppercase tracking-wide leading-tight break-words pr-4`}
-      >
-        {displayValue}
-      </span>
+    <div className="flex flex-col gap-[2px]">
+      <div className="bg-gradient-to-r from-[#FFE600] to-[#FFD700] px-3 py-1 shadow-sm w-fit border-l-4 border-[#0B5D3B] rounded-r-sm">
+        <span className="text-[9px] font-['Montserrat'] font-bold text-[#1E1E1E] uppercase tracking-[0.1em] italic">
+          {label}
+        </span>
+      </div>
+      <div className="bg-gradient-to-r from-[#0B5D3B] to-[#0A4A2F] px-4 py-1.5 shadow-md border-l-4 border-[#D4AF37] rounded-r-sm relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: "repeating-linear-gradient(-45deg, transparent, transparent 2px, #fff 2px, #fff 4px)" }}></div>
+        <span
+          className={`text-[13px] font-['Montserrat'] ${isQuote ? "italic font-medium" : "font-bold"} text-white uppercase tracking-[0.05em] leading-snug block relative z-10`}
+        >
+          {displayValue}
+        </span>
+      </div>
     </div>
   );
 }
