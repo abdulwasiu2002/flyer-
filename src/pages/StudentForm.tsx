@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import html2canvas from "html2canvas";
+import { toPng } from "html-to-image";
 import { FlyerPreview, FlyerData } from "./FlyerPreview";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -209,14 +209,17 @@ await document.fonts.ready;
 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 const pixelRatio = isIOS ? 2 : 4;
 
-const canvas = await html2canvas(hdRef.current!, {
-  scale: pixelRatio,
-  useCORS: true,
-  allowTaint: true,
+window.scrollTo(0, 0);
+const dataUrl = await toPng(hdRef.current!, {
+  pixelRatio: pixelRatio,
   backgroundColor: "#ffffff",
-  logging: false,
+  width: 1080,
+  height: 1350,
+  style: {
+    transform: "scale(1)",
+    transformOrigin: "top left",
+  },
 });
-const dataUrl = canvas.toDataURL("image/png", 1.0);
       toast.loading("Saving to server...", { id: generationToast });
 
       let flyer_url = "";
@@ -577,16 +580,16 @@ uppercase tracking-widest text-[#D4AF37] uppercase">
         scale={previewScale}
     />
 </div>
-     <div
-    style={{
-    position:"fixed",
-    left:"-99999px",
-    top:0,
-   visibility: "hidden",
-opacity: 1,
-pointerEvents: "none",
-}}
->
+      <div
+        style={{
+          position: "absolute",
+          left: 0,
+          top: 0,
+          zIndex: -1,
+          opacity: 0.01,
+          pointerEvents: "none",
+        }}
+      >
     <FlyerPreview
         ref={hdRef}
         data={{

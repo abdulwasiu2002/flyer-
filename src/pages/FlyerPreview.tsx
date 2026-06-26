@@ -44,7 +44,7 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
         {/* Dark Side Background */}
         <div className="absolute inset-0 bg-[#0B5D3B] z-0">
           <div className="absolute top-0 left-0 w-full h-full opacity-30 bg-[radial-gradient(circle_at_top_left,_var(--tw-gradient-stops))] from-[#114B36] via-[#0B5D3B] to-[#114B36]"></div>
-          <div className="absolute inset-0 opacity-[0.07] bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,#ffffff_10px,#ffffff_20px)] mix-blend-overlay"></div>
+          <div className="absolute inset-0 opacity-[0.07] bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,#ffffff_10px,#ffffff_20px)]"></div>
 
           {/* Cloud/Networking subtle background nodes on dark side */}
           <svg
@@ -108,19 +108,15 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
                 opacity="0.03"
               />
             </pattern>
-            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="4" result="blur" />
-              <feComposite in="SourceGraphic" in2="blur" operator="over" />
-            </filter>
           </defs>
 
           {/* White area */}
-          <polygon points="520,0 1080,0 1080,1350 380,1350"  />
+          <polygon points="520,0 1080,0 1080,1350 380,1350" fill="#FFFFFF" />
 
           {/* Stripes only on white area */}
          <polygon
   points="520,0 1080,0 1080,1350 380,1350"
-  fill="#FFFFFF"
+  fill="url(#diagonalStripes)"
 />
           {/* Gold Divider line with glow */}
           <line
@@ -130,7 +126,6 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
             y2="1350"
             stroke="#D4AF37"
             strokeWidth="2.5"
-            filter="url(#glow)"
             opacity="0.8"
           />
           <line
@@ -143,16 +138,7 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
           />
         </svg>
 
-        {/* White Background Premium Gradient */}
-        <div
-  className="absolute inset-0 z-[1] pointer-events-none"
-  style={{
-    clipPath: "polygon(48.1% 0,100% 0,100% 100%,35.1% 100%)",
-    background:
-      "linear-gradient(135deg,#ffffff 0%,#fbfcfa 45%,#eef7f0 100%)",
-    opacity: 0.45,
-  }}
-/>
+        {/* White Background Premium Gradient removed for html2canvas compatibility */}
         {/* Watermark */}
 <div
   className="absolute right-[140px] top-1/2 -translate-y-1/2
@@ -390,11 +376,11 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
 
         {/* Right Column Information Card */}
         <div
-          className="absolute top-[70px] right-[50px] w-[480px] bg-[#ffffff]/95 rounded-[24px] shadow-[0_25px_70px_rgba(0,0,0,0.12),0_0_80px_rgba(11,93,59,0.08)] p-8 z-20 border-2 border-[#D4AF37]/30 backdrop-blur-md overflow-hidden"
+          className="absolute top-[70px] right-[50px] w-[480px] bg-[#ffffff]/95 rounded-[24px] shadow-[0_25px_70px_rgba(0,0,0,0.12),0_0_80px_rgba(11,93,59,0.08)] p-8 z-20 border-2 border-[#D4AF37]/30 overflow-hidden"
         >
           {/* Subtle card background decoration */}
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "repeating-linear-gradient(45deg, #0B5D3B 0, #0B5D3B 1px, transparent 0, transparent 50%)", backgroundSize: "10px 10px" }}></div>
-          <div className="absolute -top-[50px] -right-[50px] w-[150px] h-[150px] bg-[#D4AF37]/10 rounded-full blur-[2xl]"></div>
+          <div className="absolute -top-[50px] -right-[50px] w-[150px] h-[150px] bg-[#D4AF37]/10 rounded-full"></div>
           
           <div className="flex flex-col gap-[18px] relative z-10">
             <InfoSection title="Personal Profile">
