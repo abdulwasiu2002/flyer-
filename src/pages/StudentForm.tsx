@@ -277,18 +277,43 @@ const dataUrl = await toPng(hdRef.current!, {
         if (!saveRes.ok) throw new Error("Failed to save data locally");
       }
 
-      // Download it!
-      const link = document.createElement("a");
-      link.href = dataUrl;
-      link.download = `${data.full_name.replace(/\s+/g, "_")}_NCC_Finalist.png`;
-      if (isIOS) {
-        link.target = "_blank";
+      // Download or Share it!
+      const fileName = `${data.full_name.replace(/\s+/g, "_")}_NCC_Finalist.png`;
+      
+      let shared = false;
+      if (navigator.share) {
+        try {
+          const res = await fetch(dataUrl);
+          const blob = await res.blob();
+          const file = new File([blob], fileName, { type: "image/png" });
+          
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            await navigator.share({
+              title: 'My NCC Finalist Flyer',
+              text: 'Check out my NCC Finalist Flyer!',
+              files: [file]
+            });
+            shared = true;
+          }
+        } catch (shareErr) {
+          console.error("Sharing failed or not supported", shareErr);
+        }
       }
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
 
-      toast.success("Flyer generated and downloaded successfully!", {
+      if (!shared) {
+        // Fallback to traditional download
+        const link = document.createElement("a");
+        link.href = dataUrl;
+        link.download = fileName;
+        if (isIOS) {
+          link.target = "_blank";
+        }
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+
+      toast.success(shared ? "Flyer generated and shared!" : "Flyer generated and downloaded successfully!", {
         id: generationToast,
       });
     } catch (err: any) {
