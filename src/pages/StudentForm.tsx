@@ -203,13 +203,13 @@ await Promise.all(
   })
 );
 
-const dataUrl = await toPng(hdRef.current!,{
-        quality: 1.0,
-        pixelRatio: 4, // High resolution
-        useCORS: true,
-        cacheBust: true, // Often helps with cached images throwing CORS
-      });
-
+const dataUrl = await toPng(hdRef.current!, {
+  pixelRatio: 4,
+  cacheBust: true,
+  backgroundColor: "#ffffff",
+  quality: 1,
+  skipFonts: true,
+});
       toast.loading("Saving to server...", { id: generationToast });
 
       let flyer_url = "";
@@ -578,8 +578,9 @@ uppercase tracking-widest text-[#D4AF37] uppercase">
     position:"fixed",
     left:"-99999px",
     top:0,
-    opacity:1,
-    pointerEvents:"none"
+   visibility: "hidden",
+opacity: 1,
+pointerEvents: "none",
 }}
 >
     <FlyerPreview

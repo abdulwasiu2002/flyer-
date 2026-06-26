@@ -144,66 +144,46 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
         </svg>
 
         {/* White Background Premium Gradient */}
+        <div
+  className="absolute inset-0 z-[1] pointer-events-none"
+  style={{
+    clipPath: "polygon(48.1% 0,100% 0,100% 100%,35.1% 100%)",
+    background:
+      "linear-gradient(135deg,#ffffff 0%,#fbfcfa 45%,#eef7f0 100%)",
+    opacity: 0.45,
+  }}
+/>
         {/* Watermark */}
 <div
-  className="
-    absolute
-    right-[140px]
-    top-1/2
-    -translate-y-1/2
-    text-[220px]
-    font-black
-    text-[#0B5D3B]
-    opacity-[0.05]
-    pointer-events-none
-    z-0
-  "
+  className="absolute right-[140px] top-1/2 -translate-y-1/2
+             text-[220px] font-black text-[#0B5D3B]
+             opacity-[0.05] pointer-events-none z-0"
 >
+  NCC
+</div>
        {/* Emerald Ribbon */}
 <div
-className="
-absolute
-top-[120px]
-right-[-150px]
-w-[600px]
-h-[120px]
-rotate-[32deg]
-rounded-full
-bg-[#0B5D3B]
-opacity-[0.12]
-pointer-events-none
-z-[2]
-"
+  className="absolute top-[120px] right-[-150px]
+             w-[600px] h-[120px]
+             rotate-[32deg]
+             rounded-full
+             bg-[#0B5D3B]
+             opacity-[0.12]
+             pointer-events-none
+             z-[2]"
 />
 
 {/* Gold Ribbon */}
 <div
-className="
-absolute
-top-[520px]
-right-[-170px]
-w-[560px]
-h-[90px]
-rotate-[32deg]
-rounded-full
-bg-[#D4AF37]
-opacity-[0.15]
-pointer-events-none
-z-[2]
-"
+  className="absolute top-[520px] right-[-170px]
+             w-[560px] h-[90px]
+             rotate-[32deg]
+             rounded-full
+             bg-[#D4AF37]
+             opacity-[0.15]
+             pointer-events-none
+             z-[2]"
 />
-        <div
-  className="absolute inset-0 z-[1] pointer-events-none"
-  style={{
-    clipPath:"polygon(48.1% 0,100% 0,100% 100%,35.1% 100%)",
-    background:"linear-gradient(135deg,#ffffff 0%,#fbfcfa 45%,#eef7f0 100%)",
-    opacity:0.45,
-  }}
-/>
-
-
-  NETWORKING
-</div>
 
 <div
   className="absolute right-[80px] top-[220px]
@@ -238,7 +218,6 @@ z-[2]
   className="w-full h-full object-contain p-1"
   loading="eager"
   decoding="sync"
-  crossOrigin="anonymous"
 />
           </div>
           <div className="w-[54px] h-[54px] rounded-full border-[2px] border-[#D4AF37] flex items-center justify-center bg-white shadow-lg overflow-hidden shrink-0">
@@ -248,7 +227,6 @@ z-[2]
   className="w-full h-full object-contain p-1"
   loading="eager"
   decoding="sync"
-  crossOrigin="anonymous"
 />
           </div>
           <div className="flex flex-col">
@@ -347,7 +325,6 @@ z-[2]
   className="w-full h-full object-cover object-top"
   loading="eager"
   decoding="sync"
-  crossOrigin="anonymous"
   onLoad={() => console.log("✅ Student photo loaded")}
   onError={() => console.error("❌ Student photo failed")}
 />
