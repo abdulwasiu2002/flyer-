@@ -38,7 +38,7 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
          background:
 "linear-gradient(135deg,#ffffff 0%,#fcfcfa 30%,#f6faf7 65%,#eef8f1 100%)",
         }}
-        className="relative overflow-hidden shrink-0"
+        className="relative overflow-hidden shrink-0 text-[#1E1E1E]"
         ref={ref}
       >
         {/* Dark Side Background */}
@@ -211,7 +211,7 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
 
         {/* Header (Logos & Dept) */}
         <div className="absolute top-[60px] left-[60px] flex items-center gap-4 z-20 w-[520px]">
-          <div className="w-[54px] h-[54px] rounded-full border-[2px] border-[#D4AF37] flex items-center justify-center bg-white shadow-lg overflow-hidden shrink-0">
+          <div className="w-[54px] h-[54px] rounded-full border-[2px] border-[#D4AF37] flex items-center justify-center bg-[#ffffff] shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1),0_4px_6px_-4px_rgba(0,0,0,0.1)] overflow-hidden shrink-0">
             <img
   src="/fpb-logo.png"
   alt="FPB Logo"
@@ -221,9 +221,9 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
   crossOrigin="anonymous"
 />
           </div>
-          <div className="w-[54px] h-[54px] rounded-full border-[2px] border-[#D4AF37] flex items-center justify-center bg-white shadow-lg overflow-hidden shrink-0">
+          <div className="w-[54px] h-[54px] rounded-full border-[2px] border-[#D4AF37] flex items-center justify-center bg-[#ffffff] shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1),0_4px_6px_-4px_rgba(0,0,0,0.1)] overflow-hidden shrink-0">
             <img
-  src="/ncc-logo.png"
+  src="/nacos-logo.png"
   alt="NCC Logo"
   className="w-full h-full object-contain p-1"
   loading="eager"
@@ -232,7 +232,7 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
 />
           </div>
           <div className="flex flex-col">
-            <p className="text-white text-[11px] font-['Montserrat'] font-bold tracking-[0.15em] uppercase">
+            <p className="text-[#ffffff] text-[11px] font-['Montserrat'] font-bold tracking-[0.15em] uppercase">
               Federal Polytechnic Bida
             </p>
             <p className="text-[#D4AF37] text-[9px] font-['Montserrat'] font-bold tracking-[0.2em] uppercase mt-1">
@@ -253,7 +253,7 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
       text-[#D4AF37]
       leading-none
       tracking-tight
-      drop-shadow-lg
+      drop-shadow-[0_4px_4px_rgba(0,0,0,0.15)]
     "
   >
     FYB '26
@@ -285,7 +285,7 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
       text-[90px]
       leading-[0.82]
       tracking-tight
-      drop-shadow-lg
+      drop-shadow-[0_4px_4px_rgba(0,0,0,0.15)]
     "
   >
     NETWORKING
@@ -294,7 +294,7 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
   <p
     className="
       uppercase
-      text-white
+      text-[#ffffff]
       font-semibold
       tracking-[0.35em]
       text-[18px]
@@ -308,7 +308,7 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
   <div className="w-[180px] h-[5px] bg-[#D4AF37] rounded-full mt-5"></div>
 
   {/* Badge */}
-  <div className="inline-block mt-8 bg-[#388E3C] text-white px-6 py-2 rounded-md shadow-lg border border-[#D4AF37]/40 rotate-[-2deg]">
+  <div className="inline-block mt-8 bg-[#388E3C] text-[#ffffff] px-6 py-2 rounded-md shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1)] border border-[#D4AF37]/40 rotate-[-2deg]">
     <span className="uppercase tracking-[0.18em] text-[15px] font-bold italic">
       STUDENT OF THE WEEK
     </span>
@@ -318,7 +318,7 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
 
 
         {/* Photo Card */}
-        <div className="absolute top-[440px] left-[60px] w-[460px] bg-white rounded-[22px] shadow-[0_30px_60px_rgba(0,0,0,0.15)] p-5 pb-8 z-30 border-[2px] border-[#D4AF37]/40">
+        <div className="absolute top-[440px] left-[60px] w-[460px] bg-[#ffffff] rounded-[22px] shadow-[0_30px_60px_rgba(0,0,0,0.15)] p-5 pb-8 z-30 border-[2px] border-[#D4AF37]/40">
           <div className="w-full h-[540px] bg-[#F7F7F7] rounded-[14px] overflow-hidden relative">
             {data.photo_url ? (
              <img
@@ -331,9 +331,9 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
   onError={() => console.error("❌ Student photo failed")}
 />
             ) : (
-              <div className="w-full h-full flex flex-col items-center justify-center text-neutral-400 gap-3">
-                <div className="w-20 h-20 border-2 border-dashed border-neutral-300 rounded-full"></div>
-                <p className="text-sm font-['Montserrat'] font-semibold uppercase tracking-widest">
+              <div className="w-full h-full flex flex-col items-center justify-center text-[#a3a3a3] gap-3">
+                <div className="w-20 h-20 border-2 border-dashed border-[#d4d4d4] rounded-full"></div>
+                <p className="text-[#a3a3a3] text-[14px] font-['Montserrat'] font-semibold uppercase tracking-widest">
                   Photo Here
                 </p>
               </div>
@@ -364,13 +364,13 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
         {/* Quote Section at bottom left (under photo) */}
         <div className="absolute bottom-[50px] left-[60px] w-[350px] z-20 flex items-center gap-4">
           <div className="flex-1">
-            <p className="text-[#D4AF37] text-[60px] font-['Great_Vibes'] drop-shadow-md leading-none">
+            <p className="text-[#D4AF37] text-[60px] font-['Great_Vibes'] drop-shadow-[0_2px_2px_rgba(0,0,0,0.15)] leading-none">
               {data.favorite_quote
                 ? "“" + data.favorite_quote.split(" ")[0]
                 : "Grateful Soul"}
             </p>
           </div>
-          <div className="w-12 h-12 rounded-full bg-[#D4AF37] flex items-center justify-center shadow-lg">
+          <div className="w-12 h-12 rounded-full bg-[#D4AF37] flex items-center justify-center shadow-[0_10px_15px_-3px_rgba(0,0,0,0.1)]">
             <svg
               width="24"
               height="24"
@@ -380,7 +380,7 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
               strokeWidth="3"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="text-white"
+              className="text-[#ffffff]"
             >
               <path d="M5 12h14" />
               <path d="m12 5 7 7-7 7" />
@@ -390,7 +390,7 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
 
         {/* Right Column Information Card */}
         <div
-          className="absolute top-[70px] right-[50px] w-[480px] bg-white/95 rounded-[24px] shadow-[0_25px_70px_rgba(0,0,0,0.12),0_0_80px_rgba(11,93,59,0.08)] p-8 z-20 border-2 border-[#D4AF37]/30 backdrop-blur-md overflow-hidden"
+          className="absolute top-[70px] right-[50px] w-[480px] bg-[#ffffff]/95 rounded-[24px] shadow-[0_25px_70px_rgba(0,0,0,0.12),0_0_80px_rgba(11,93,59,0.08)] p-8 z-20 border-2 border-[#D4AF37]/30 backdrop-blur-md overflow-hidden"
         >
           {/* Subtle card background decoration */}
           <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: "repeating-linear-gradient(45deg, #0B5D3B 0, #0B5D3B 1px, transparent 0, transparent 50%)", backgroundSize: "10px 10px" }}></div>
@@ -553,7 +553,7 @@ stroke="#D4AF37"
               <path d="m2 17 10 5 10-5" />
               <path d="m2 12 10 5 10-5" />
             </svg>
-            <span className="text-[10px] font-['Montserrat'] font-extrabold text-white tracking-widest">
+            <span className="text-[10px] font-['Montserrat'] font-extrabold text-[#ffffff] tracking-widest">
               NCC
             </span>
             <span className="text-[8px] font-['Inter'] font-semibold text-[#D4AF37] tracking-widest leading-none mt-0.5">
@@ -601,15 +601,15 @@ function DetailRow({
 
   return (
     <div className="flex flex-col gap-[2px]">
-      <div className="bg-gradient-to-r from-[#FFE600] to-[#FFD700] px-3 py-1 shadow-sm w-fit border-l-4 border-[#0B5D3B] rounded-r-sm">
+      <div className="bg-gradient-to-r from-[#FFE600] to-[#FFD700] px-3 py-1 shadow-[0_1px_2px_0_rgba(0,0,0,0.05)] w-fit border-l-4 border-[#0B5D3B] rounded-r-sm">
         <span className="text-[9px] font-['Montserrat'] font-bold text-[#1E1E1E] uppercase tracking-[0.1em] italic">
           {label}
         </span>
       </div>
-      <div className="bg-gradient-to-r from-[#0B5D3B] to-[#0A4A2F] px-4 py-1.5 shadow-md border-l-4 border-[#D4AF37] rounded-r-sm relative overflow-hidden">
+      <div className="bg-gradient-to-r from-[#0B5D3B] to-[#0A4A2F] px-4 py-1.5 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)] border-l-4 border-[#D4AF37] rounded-r-sm relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: "repeating-linear-gradient(-45deg, transparent, transparent 2px, #fff 2px, #fff 4px)" }}></div>
         <span
-          className={`text-[13px] font-['Montserrat'] ${isQuote ? "italic font-medium" : "font-bold"} text-white uppercase tracking-[0.05em] leading-snug block relative z-10`}
+          className={`text-[13px] font-['Montserrat'] ${isQuote ? "italic font-medium" : "font-bold"} text-[#ffffff] uppercase tracking-[0.05em] leading-snug block relative z-10`}
         >
           {displayValue}
         </span>
