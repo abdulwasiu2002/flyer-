@@ -213,7 +213,7 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
         <div className="absolute top-[60px] left-[60px] flex items-center gap-4 z-20 w-[520px]">
           <div className="w-[54px] h-[54px] rounded-full border-[2px] border-[#D4AF37] flex items-center justify-center bg-white shadow-lg overflow-hidden shrink-0">
             <img
-  src="/api/proxy-image?url=https://results.fedpolybida.edu.ng/img/favicon.ico"
+  src="/fpb-logo.png"
   alt="FPB Logo"
   className="w-full h-full object-contain p-1"
   loading="eager"
@@ -223,7 +223,7 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
           </div>
           <div className="w-[54px] h-[54px] rounded-full border-[2px] border-[#D4AF37] flex items-center justify-center bg-white shadow-lg overflow-hidden shrink-0">
             <img
-  src="/api/proxy-image?url=https://nacos.org.ng/img/about.jpg"
+  src="/nacos-logo.png"
   alt="NCC Logo"
   className="w-full h-full object-contain p-1"
   loading="eager"
