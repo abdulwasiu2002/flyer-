@@ -268,12 +268,19 @@ const dataUrl = await toPng(hdRef.current!, {
       }
 
       // Download it!
-     const link = document.createElement("a");
+     const isIOS =
+  /iPad|iPhone|iPod/.test(navigator.userAgent);
 
-link.href = dataUrl;
-link.download = `${data.full_name.replace(/\s+/g, "_")}_NCC_Finalist.png`;
-
-document.body.appendChild(link);
+if (isIOS) {
+  window.open(dataUrl, "_blank");
+} else {
+  const link = document.createElement("a");
+  link.href = dataUrl;
+  link.download = `${data.full_name.replace(/\s+/g, "_")}_NCC_Finalist.png`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
 
 // Force browser download
 requestAnimationFrame(() => {
