@@ -223,7 +223,7 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(
           </div>
           <div className="w-[54px] h-[54px] rounded-full border-[2px] border-[#D4AF37] flex items-center justify-center bg-white shadow-lg overflow-hidden shrink-0">
             <img
-  src="/nacos-logo.png"
+  src="/ncc-logo.png"
   alt="NCC Logo"
   className="w-full h-full object-contain p-1"
   loading="eager"

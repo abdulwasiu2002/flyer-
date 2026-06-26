@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import html2canvas from "html2canvas";
-import { FlyerPreview, FlyerData } from "../components/FlyerPreview";
+import { FlyerPreview, FlyerData } from "./FlyerPreview";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
